@@ -51,11 +51,11 @@ const useStyles = makeStyles({
   },
 });
 async function getApi() {
-  const data = await axios.get(
-    `http://ws-old.parlament.ch/councillors?format=json`
-  );
-  console.log("data", data);
-  const testURL = "http://ws-old.parlament.ch/sessions?pageNumber=2";
+  // const data = await axios.get(
+  //   `http://ws-old.parlament.ch/councillors?format=json`
+  // );
+  // console.log("data", data);
+  const testURL = "http://ws-old.parlament.ch/councillors?format=json";
 
   let response = await fetch(testURL, {
     method: "GET", // *GET, POST, PUT, DELETE, etc.
