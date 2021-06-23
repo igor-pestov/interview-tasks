@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@material-ui/core";
 import "./Tabel.scss";
-import axios from "axios";
+// import axios from "axios";
 const columns = [
   { id: "id", label: "Id", minWidth: 170 },
   { id: "number", label: "Number", minWidth: 100 },
