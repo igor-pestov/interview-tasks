@@ -54,8 +54,26 @@ async function getApi() {
   const data = await axios.get(
     `http://ws-old.parlament.ch/councillors?format=json`
   );
-  console.log(data);
-} 
+  console.log("data", data);
+  const testURL = "http://ws-old.parlament.ch/sessions?pageNumber=2";
+
+  let response = await fetch(testURL, {
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    mode: "no-cors", // no-cors, *cors, same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: "follow", // manual, *follow, error
+    referrerPolicy: "no-referrer", // no-referrer, *client
+  });
+  console.log("ressss", response);
+  //   fetch(testURL, myInit)
+  //     .then(res => console.log(res))
+  //     .then(data => console.log("trest", data));
+}
 getApi();
 function Councillors() {
   const classes = useStyles();
@@ -73,14 +91,13 @@ function Councillors() {
   };
   const handleSort = (name) => {
     setSort({ up: !sort.up, name });
-    console.log(sort);
     let newData = [];
-    if (sort.up && sort.name !== name) {
+    if (!sort.up && sort.name === name) {
       newData = data.sort((a, b) => {
-        if (a[`${name}`] < b[`${name}`]) {
+        if (a[`${name}`] > b[`${name}`]) {
           return 1;
         }
-        if (a[`${name}`] > b[`${name}`]) {
+        if (a[`${name}`] < b[`${name}`]) {
           return -1;
         }
         return 0;
@@ -92,10 +109,10 @@ function Councillors() {
       );
     } else {
       newData = data.sort((a, b) => {
-        if (a[`${name}`] > b[`${name}`]) {
+        if (a[`${name}`] < b[`${name}`]) {
           return 1;
         }
-        if (a[`${name}`] < b[`${name}`]) {
+        if (a[`${name}`] > b[`${name}`]) {
           return -1;
         }
         return 0;
