@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@material-ui/core";
 import "./Tabel.scss";
+import axios from "axios";
 const columns = [
   { id: "id", label: "Id", minWidth: 170 },
   { id: "number", label: "Number", minWidth: 100 },
@@ -49,7 +50,13 @@ const useStyles = makeStyles({
     textAlign: "center",
   },
 });
-
+async function getApi() {
+  const data = await axios.get(
+    `http://ws-old.parlament.ch/councillors?format=json`
+  );
+  console.log(data);
+} 
+getApi();
 function Councillors() {
   const classes = useStyles();
   const [page, setPage] = useState(0);
@@ -100,12 +107,7 @@ function Councillors() {
       );
     }
   };
-  const arr = [
-    { up: true, name: "qwe" },
-    { up: true, name: "two" },
-  ];
-  arr[1] = { ...arr[1], name: "free" };
-  console.log(arr);
+
   return (
     <div className="Tabel">
       <Paper className={classes.root}>
